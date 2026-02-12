@@ -266,6 +266,11 @@ const FreeTierQuestion = {
   activeMessage: null,
   messageTimer: null,
 
+  // Sound resources
+  bounceSounds: [],
+  yesSounds: [],
+  currentYesSoundIndex: 0,
+
   playfulMessages: [
     "Oops! Try again! 😅",
     "Not there! 😜",
@@ -287,6 +292,68 @@ const FreeTierQuestion = {
   init() {
     this.setupNoButtonBehavior();
     this.setupYesButton();
+    this.preloadSounds();
+  },
+
+  preloadSounds() {
+    // Force absolute path based on project root
+    const rootPath = window.location.origin + '/valentines-ui';
+    const soundBase = rootPath + '/assets/sounds';
+
+    // Preload No sounds (bounce 1-11)
+    for (let i = 1; i <= 11; i++) {
+      const audio = new Audio(`${soundBase}/no/bounce-${i}.mp3`);
+      audio.preload = 'auto';
+      audio.load();
+      audio.oncanplaythrough = () => console.log(`Loaded bounce-${i}`);
+      audio.onerror = (e) => console.error(`Failed to load bounce-${i}:`, e);
+      this.bounceSounds.push(audio);
+    }
+    // Preload Yes sounds (cheering 1-2)
+    for (let i = 1; i <= 2; i++) {
+      const audio = new Audio(`${soundBase}/yes/cheering-${i}.mp3`);
+      audio.preload = 'auto';
+      audio.load();
+      audio.oncanplaythrough = () => console.log(`Loaded cheering-${i}`);
+      audio.onerror = (e) => console.log(`Failed to load cheering-${i}:`, e);
+      this.yesSounds.push(audio);
+    }
+  },
+
+  playRandomBounce() {
+    if (this.bounceSounds.length === 0) return;
+    const randomIndex = Math.floor(Math.random() * this.bounceSounds.length);
+    const sound = this.bounceSounds[randomIndex];
+
+    // Clone node to allow overlapping sounds (rapid bounces)
+    const soundClone = sound.cloneNode();
+    soundClone.volume = 0.5; // Slightly lower volume for bounces
+
+    // Attempt play and log errors
+    const playPromise = soundClone.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.warn('Bounce sound playback failed:', error);
+      });
+    }
+  },
+
+  playYesSounds() {
+    if (this.yesSounds.length === 0) return;
+
+    // Play first cheering sound
+    const sound1 = this.yesSounds[0];
+    sound1.volume = 0.8;
+    sound1.play().catch(e => console.log('Audio playback failed:', e));
+
+    // Chain the second sound if available
+    if (this.yesSounds.length > 1) {
+      sound1.onended = () => {
+        const sound2 = this.yesSounds[1];
+        sound2.volume = 0.8;
+        sound2.play().catch(e => console.log('Audio playback failed:', e));
+      };
+    }
   },
 
   setupNoButtonBehavior() {
@@ -338,6 +405,7 @@ const FreeTierQuestion = {
 
     this.isDodging = true;
     this.dodgeNoButton(button);
+    this.playRandomBounce(); // Play sound on dodge
 
     setTimeout(() => {
       this.isDodging = false;
@@ -495,6 +563,9 @@ const FreeTierQuestion = {
   },
 
   handleYesClick() {
+    // Play celebratory sounds
+    this.playYesSounds();
+
     // Hide question content
     const questionContent = document.getElementById('questionContent');
     if (questionContent) {

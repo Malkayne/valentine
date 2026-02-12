@@ -193,7 +193,7 @@
                         <li><i class="fas fa-check-circle"></i> Only ₦2,500</li>
                     </ul>
 
-                    <a href="premium-tier/index.html" class="tier-btn premium-btn">
+                    <a href="premium-tier/index.php" class="tier-btn premium-btn">
                         <i class="fas fa-gem"></i> Start Building - ₦2,500
                     </a>
                 </div>

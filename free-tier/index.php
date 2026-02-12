@@ -151,7 +151,7 @@
                 <a href="../">Home</a>
                 <a href="../premium-tier/">Premium</a>
             </div>
-            <p class="footer-copyright">&copy; 2026 Valentine's Special. Made with ❤️</p>
+            <p class="footer-copyright">&copy; 2026 Valentine's Special. Made with ❤️ from <a href="https://intellicsolutions.org" target="_blank" style="color: var(--free-primary);">Intellic Solutions Team</a>.</p>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

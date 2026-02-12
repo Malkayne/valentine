@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Love page URL rewrite: /love/slug → premium-tier/view.php?slug=slug
+RewriteRule ^love/([a-zA-Z0-9-]+)/?$ premium-tier/view.php?slug=$1 [L,QSA]
