@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+error_log
+
+# Build
+dist/
+build/
+*.min.css
+*.min.js
+
+# Temporary
+*.tmp
+*.temp
+*.swp
+*.bak
+*~
+
+# User uploads (keep structure)
+assets/images/backgrounds/*.jpg
+assets/images/backgrounds/*.png
+assets/images/gallery/*.jpg
+assets/images/gallery/*.png
+assets/images/demo-avatars/*.jpg
+assets/images/demo-avatars/*.png
+!assets/images/**/.gitkeep
+
+# Database
+*.sql
+*.sqlite
+*.db
+
+# System
+.Trash-*
+desktop.ini
+
+# Testing
+coverage/
+.nyc_output/
+
+# Backend (when added)
+config.php
+/uploads/*
+!/uploads/.gitkeep
