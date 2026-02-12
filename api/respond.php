@@ -87,7 +87,7 @@ if (!empty($valentine['sender_email'])) {
         </div>
 
         <div style='text-align: center; margin-top: 25px; color: #aaa; font-size: 0.85rem;'>
-            <p>Sent by Valentine's Special &bull; Made with ❤️</p>
+            <p>Sent by Valentine's Special &bull; Made with ❤️ by <a href='https://intellicsolutions.org' target='_blank' style='color: #FF1744;'>Intellic Solutions Team</a>.</p>
         </div>
     </div>";
 
